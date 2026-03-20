@@ -13,26 +13,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .header .meta{font-size:11px;color:#888;margin-top:2px}
 .tags{display:flex;gap:6px}
 .tag{font-size:11px;padding:3px 10px;border-radius:20px;font-weight:500}
-.tag-cainiao{background:#e6f1fb;color:#0c447c}
-.tag-lecang{background:#eaf3de;color:#3b6d11}
+.tag-cn{background:#e6f1fb;color:#0c447c}
+.tag-lc{background:#eaf3de;color:#3b6d11}
 .body{padding:16px 24px;max-width:1320px;margin:0 auto}
 
 .slicer-bar{background:#fff;border:1px solid #e0dfd8;border-radius:12px;padding:12px 16px;margin-bottom:14px}
 .slicer-row{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start;margin-bottom:10px}
 .slicer-row:last-child{margin-bottom:0}
-.sg{display:flex;flex-direction:column;gap:6px;flex:1;min-width:140px}
-.sg.wide{flex:2;min-width:280px}
+.sg{display:flex;flex-direction:column;gap:6px;min-width:120px}
+.sg.wide{flex:2}
 .sl{font-size:10px;color:#999;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
 .pills{display:flex;flex-wrap:wrap;gap:4px}
 .pill{padding:4px 11px;font-size:11px;border:1px solid #d5d4cc;border-radius:20px;cursor:pointer;background:#fff;color:#555;transition:all .12s;user-select:none;white-space:nowrap}
 .pill:hover{border-color:#999;color:#1a1a1a}
 .pill.on{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
-.slicer-divider{border:none;border-top:1px dashed #e8e7e0;margin:10px 0}
+.divider{border:none;border-top:1px dashed #e8e7e0;margin:10px 0}
 
 .metrics{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:14px}
 .mc{background:#fff;border:1px solid #e0dfd8;border-radius:12px;padding:12px 14px}
 .mc .lbl{font-size:10px;color:#888;margin-bottom:4px;font-weight:500}
-.mc .val{font-size:20px;font-weight:600;color:#1a1a1a;line-height:1.1}
+.mc .val{font-size:18px;font-weight:600;color:#1a1a1a;line-height:1.2}
 .mc .sub{font-size:10px;color:#aaa;margin-top:3px}
 .mc.warn{border-color:#f09595;background:#fff8f8}
 .mc.warn .val{color:#a32d2d}
@@ -59,7 +59,6 @@ tr:hover td{background:#fafaf8}
 .chip-de{background:#faeeda;color:#633806}
 .chip-cn{background:#e6f1fb;color:#0c447c}
 .chip-lc{background:#eaf3de;color:#3b6d11}
-.notice{background:#fff8f0;border:1px solid #f0c87a;border-radius:8px;padding:8px 12px;font-size:11px;color:#854f0b;margin-bottom:10px}
 footer{text-align:center;font-size:11px;color:#bbb;padding:16px;margin-top:4px}
 </style>
 </head>
@@ -68,11 +67,11 @@ footer{text-align:center;font-size:11px;color:#bbb;padding:16px;margin-top:4px}
 <div class="header">
   <div>
     <h1>HINOMI — 全球仓储费用报表</h1>
-    <div class="meta">账单期间：2026.02.01 – 2026.02.28 · 6个仓库 · 4种货币</div>
+    <div class="meta">账单期间：2026.02.01 – 2026.02.28 · 7个仓库单元 · 4种货币</div>
   </div>
   <div class="tags">
-    <span class="tag tag-cainiao">菜鸟仓</span>
-    <span class="tag tag-lecang">乐仓</span>
+    <span class="tag tag-cn">菜鸟仓</span>
+    <span class="tag tag-lc">乐仓</span>
   </div>
 </div>
 
@@ -81,7 +80,7 @@ footer{text-align:center;font-size:11px;color:#bbb;padding:16px;margin-top:4px}
 <div class="slicer-bar">
   <div class="slicer-row">
     <div class="sg">
-      <div class="sl">仓库平台</div>
+      <div class="sl">平台</div>
       <div class="pills" id="s-platform">
         <span class="pill on" data-v="ALL">全部</span>
         <span class="pill" data-v="菜鸟">菜鸟</span>
@@ -100,16 +99,20 @@ footer{text-align:center;font-size:11px;color:#bbb;padding:16px;margin-top:4px}
     </div>
     <div class="sg">
       <div class="sl">仓库</div>
-      <div class="pills" id="s-warehouse">
+      <div class="pills" id="s-wh">
         <span class="pill on" data-v="ALL">全部</span>
         <span class="pill" data-v="菜鸟日本仓">菜鸟日本仓</span>
         <span class="pill" data-v="菜鸟英国仓">菜鸟英国仓</span>
-        <span class="pill" data-v="菜鸟美国仓">菜鸟美国仓</span>
+        <span class="pill" data-v="美东新泽西2仓">美东新泽西2仓</span>
+        <span class="pill" data-v="美西洛杉矶5仓">美西洛杉矶5仓</span>
         <span class="pill" data-v="乐仓美国仓">乐仓美国仓</span>
         <span class="pill" data-v="乐仓德国仓">乐仓德国仓</span>
         <span class="pill" data-v="乐仓英国仓">乐仓英国仓</span>
       </div>
     </div>
+  </div>
+  <hr class="divider">
+  <div class="slicer-row">
     <div class="sg">
       <div class="sl">库龄段</div>
       <div class="pills" id="s-aging">
@@ -123,9 +126,6 @@ footer{text-align:center;font-size:11px;color:#bbb;padding:16px;margin-top:4px}
         <span class="pill" data-v=">360天">&gt;360天</span>
       </div>
     </div>
-  </div>
-  <hr class="slicer-divider">
-  <div class="slicer-row">
     <div class="sg">
       <div class="sl">仓租月份</div>
       <div class="pills" id="s-month">
@@ -135,31 +135,37 @@ footer{text-align:center;font-size:11px;color:#bbb;padding:16px;margin-top:4px}
       </div>
     </div>
     <div class="sg wide">
-      <div class="sl">SKU 型号 <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#bbb">（基于出库/运费数据）</span></div>
+      <div class="sl">SKU 型号</div>
       <div class="pills" id="s-sku">
         <span class="pill on" data-v="ALL">全部</span>
+        <span class="pill" data-v="H1PRO">H1PRO</span>
+        <span class="pill" data-v="H2PRO">H2PRO</span>
+        <span class="pill" data-v="H2PRO-FOOTREST">H2PRO-FOOTREST</span>
+        <span class="pill" data-v="Q2">Q2</span>
+        <span class="pill" data-v="Q2-USED">Q2-USED</span>
+        <span class="pill" data-v="X1">X1</span>
+        <span class="pill" data-v="X2">X2</span>
+        <span class="pill" data-v="OTHERS">OTHERS</span>
       </div>
     </div>
   </div>
 </div>
 
-<div id="sku-notice" class="notice" style="display:none"></div>
-
 <div class="metrics">
-  <div class="mc"><div class="lbl">筛选仓库</div><div class="val" id="m-wh">6</div><div class="sub">个</div></div>
+  <div class="mc"><div class="lbl">筛选仓库</div><div class="val" id="m-wh">7</div><div class="sub">个</div></div>
   <div class="mc"><div class="lbl">仓储费合计</div><div class="val" id="m-storage">—</div><div class="sub">各币种</div></div>
   <div class="mc"><div class="lbl">出库/运费合计</div><div class="val" id="m-outbound">—</div><div class="sub">各币种</div></div>
-  <div class="mc warn"><div class="lbl">⚠ 高风险库龄（180天+）</div><div class="val" id="m-risk">—</div><div class="sub">仓储费</div></div>
+  <div class="mc warn"><div class="lbl">⚠ 180天+ 高风险</div><div class="val" id="m-risk">—</div><div class="sub">仓储费</div></div>
   <div class="mc"><div class="lbl">账单合计</div><div class="val" id="m-bill">—</div><div class="sub">各币种</div></div>
 </div>
 
 <div class="grid2">
   <div class="card">
-    <div class="card-title">各仓库账单合计（本币）</div>
+    <div class="card-title">各仓库仓储费（本币）</div>
     <div class="cw" style="height:220px"><canvas id="c-bill"></canvas></div>
   </div>
   <div class="card">
-    <div class="card-title">库龄段占比（仓储费）</div>
+    <div class="card-title">库龄段占比</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:center">
       <div class="cw" style="height:180px"><canvas id="c-donut"></canvas></div>
       <div id="donut-leg" style="font-size:11px"></div>
@@ -169,14 +175,14 @@ footer{text-align:center;font-size:11px;color:#bbb;padding:16px;margin-top:4px}
 
 <div class="grid2">
   <div class="card">
-    <div class="card-title">各仓库库龄段堆叠（仓储费）</div>
+    <div class="card-title">库龄段堆叠（各仓库仓储费）</div>
     <div class="legend" id="leg-aging"></div>
     <div class="cw" style="height:200px"><canvas id="c-aging-bar"></canvas></div>
   </div>
   <div class="card">
-    <div class="card-title">月份趋势（仓储费）</div>
-    <div class="legend" id="leg-month"></div>
-    <div class="cw" style="height:200px"><canvas id="c-month"></canvas></div>
+    <div class="card-title">SKU 型号分布（仓储费）</div>
+    <div class="legend" id="leg-sku"></div>
+    <div class="cw" style="height:200px"><canvas id="c-sku-bar"></canvas></div>
   </div>
 </div>
 
@@ -190,7 +196,7 @@ footer{text-align:center;font-size:11px;color:#bbb;padding:16px;margin-top:4px}
           <th style="text-align:right">仓储费</th>
           <th style="text-align:right">出库/运费</th>
           <th style="text-align:right">账单合计</th>
-          <th style="text-align:right">180天+ 仓储费</th>
+          <th style="text-align:right">180天+ 风险</th>
           <th>主要库龄</th>
         </tr>
       </thead>
@@ -200,231 +206,267 @@ footer{text-align:center;font-size:11px;color:#bbb;padding:16px;margin-top:4px}
 </div>
 
 </div>
-<footer>HINOMI PTE. LTD. · 全球仓储费用报表 2026-02 · 数据来源：菜鸟 + 乐仓系统账单</footer>
+<footer>HINOMI PTE. LTD. · 全球仓储费用报表 2026-02 · 菜鸟 + 乐仓 · SKU mapping: Book2</footer>
 
 <script>
 const AGING_KEYS = ['0-30天','30-60天','60-90天','90-120天','120-180天','180-360天','>360天'];
 const AGING_COLORS = {'0-30天':'#888780','30-60天':'#1d9e75','60-90天':'#7f77dd','90-120天':'#d4537e','120-180天':'#378add','180-360天':'#ef9f27','>360天':'#e24b4a'};
-const WH_COLORS = {'菜鸟日本仓':'#378add','菜鸟英国仓':'#7f77dd','菜鸟美国仓':'#1d9e75','乐仓美国仓':'#5dcaa5','乐仓德国仓':'#ef9f27','乐仓英国仓':'#d4537e'};
-const COUNTRY_CHIP = {'日本':'chip-jp','英国':'chip-uk','美国':'chip-us','德国':'chip-de'};
-const ALL_MONTHS = ['2026-01','2026-02'];
+const SKU_TYPES = ['H1PRO','H2PRO','H2PRO-FOOTREST','Q2','Q2-USED','X1','X2','OTHERS'];
+const SKU_COLORS = {'H1PRO':'#378add','H2PRO':'#1d9e75','H2PRO-FOOTREST':'#7f77dd','Q2':'#d4537e','Q2-USED':'#ef9f27','X1':'#e24b4a','X2':'#5dcaa5','OTHERS':'#888780'};
 
-// Per-warehouse monthly breakdown (仓储费 by month x aging)
-const WH_MONTHLY = {
-  '菜鸟日本仓': {'2026-02':{'60-90天':46501,'30-60天':0,'180-360天':102644,'120-180天':2889,'90-120天':58240,'>360天':711},'2026-01':{'180-360天':4365,'30-60天':0,'60-90天':3316,'120-180天':107}},
-  '菜鸟英国仓': {'2026-02':{'0-30天':0,'30-60天':0},'2026-01':{'0-30天':0}},
-  '菜鸟美国仓': {'2026-02':{'180-360天':1337.03,'0-30天':0,'>360天':290.7,'120-180天':476.73,'60-90天':1983.59,'90-120天':190.73},'2026-01':{'0-30天':0,'120-180天':19.35,'180-360天':44.14,'>360天':10.3,'90-120天':4.75,'60-90天':25.3}},
-  '乐仓美国仓': {'2026-02':{'>360天':734.7,'180-360天':290.55,'120-180天':61.13,'0-30天':19.62}},
-  '乐仓德国仓': {'2026-02':{'>360天':333.12,'120-180天':187.18,'180-360天':888.32,'60-90天':206.55,'30-60天':118.85,'0-30天':71.98,'90-120天':34.9}},
-  '乐仓英国仓': {'2026-02':{'120-180天':8085.12,'60-90天':4377.73,'0-30天':3595.68,'90-120天':928.09,'30-60天':1891.46,'180-360天':12487.44}},
-};
+const JP_AGING = {"120-180天":{"2026-01":107,"2026-02":2889},"180-360天":{"2026-01":4365,"2026-02":102644},"30-60天":{"2026-01":0,"2026-02":0},"60-90天":{"2026-01":3316,"2026-02":46501},"90-120天":{"2026-02":58240},">360天":{"2026-02":711}};
+const US_NJ_AGING = {"0-30天":{"2026-01":0,"2026-02":0},"120-180天":{"2026-01":15.93,"2026-02":385.97},"180-360天":{"2026-01":44.12,"2026-02":1321.56},"60-90天":{"2026-01":21.62,"2026-02":480.28},"90-120天":{"2026-01":2.68,"2026-02":122.5},">360天":{"2026-01":0.88,"2026-02":45.01}};
+const US_LA_AGING = {"0-30天":{"2026-01":0,"2026-02":0},"120-180天":{"2026-01":3.42,"2026-02":90.76},"180-360天":{"2026-01":0.02,"2026-02":15.47},"60-90天":{"2026-01":3.68,"2026-02":1503.31},"90-120天":{"2026-01":2.07,"2026-02":68.23},">360天":{"2026-01":9.42,"2026-02":245.69}};
+const LCUS_SKU_AGING = {"H1PRO":{"120-180天":{"2026-02":61.13}},"OTHERS":{"180-360天":{"2026-02":290.55},">360天":{"2026-02":734.7}},"X1":{"0-30天":{"2026-02":19.62}}};
+const LCDE_SKU_AGING = {"H1PRO":{"0-30天":{"2026-02":71.98},"120-180天":{"2026-02":111.04},"30-60天":{"2026-02":118.85},"60-90天":{"2026-02":206.55}},"OTHERS":{"180-360天":{"2026-02":888.32},">360天":{"2026-02":333.12}},"X1":{"120-180天":{"2026-02":76.14},"90-120天":{"2026-02":34.9}}};
+const LCUK_SKU_AGING = {"H1PRO":{"120-180天":{"2026-02":296},"90-120天":{"2026-02":193.52}},"H2PRO":{"0-30天":{"2026-02":941.08},"30-60天":{"2026-02":747.64},"60-90天":{"2026-02":1402.54},"90-120天":{"2026-02":128.94}},"H2PRO-FOOTREST":{"0-30天":{"2026-02":408.76},"30-60天":{"2026-02":686.56},"60-90天":{"2026-02":1242.73},"90-120天":{"2026-02":64.47}},"OTHERS":{"0-30天":{"2026-02":1433.16},"120-180天":{"2026-02":7582.88},"180-360天":{"2026-02":12487.44},"30-60天":{"2026-02":457.26},"60-90天":{"2026-02":32.26}},"Q2":{"0-30天":{"2026-02":196.96},"60-90天":{"2026-02":1700.2},"90-120天":{"2026-02":257.88}},"Q2-USED":{"0-30天":{"2026-02":418.76}},"X1":{"120-180天":{"2026-02":206.24},"90-120天":{"2026-02":283.28}},"X2":{"0-30天":{"2026-02":196.96}}};
 
-// SKUs per warehouse
-const WH_SKUS = {
-  '菜鸟日本仓': ['AC-GASLIFT-100X70-M','AC-GASLIFT-125X103','AC-GASLIFT-80X90-S','AC-H2PRO-LEG-GRY','H1PROV2-RED-M4','H1PROV2-RED-X4','H2PRO-FOOTREST-BLK','H2PRO-FOOTREST-GRY','H2PRO-GRN','Q2-BLK-V2','Q2-WHT-V2','X2PRO-GRY','X2PRO-PNK'],
-  '菜鸟英国仓': [],
-  '菜鸟美国仓': ['AC-GASLIFT-100X50-X','AC-GASLIFT-100X70-M','AC-GASLIFT-125X103','AC-GASLIFT-80X90-S','AC-H1PROV2-BACK-BLK','AC-H1PROV2-BACK-GRY','AC-H1PROV2-BACK-RED','AC-H2PRO-BACKREST-METALROD','AC-H2PRO-HEADREST-COVER-GRY','AC-H2PRO-HEADREST-GRN','AC-H2PRO-SEAT-MCNSM-BLK','AC-Q2-ARMREST-WHT-L','AC-Q2-BACKREST-BLK','AC-Q2-LUMBAR-GRY','AC-X1-SEAT-MCNSM-GRY','AC-X2PRO-SEAT-MCNSM-GRY','ARM-CYBER-DBL-WHT','H1PROV2-BLK-M','H2PRO-BLK','H2PRO-FOOTREST-BLK','H2PRO-FOOTREST-GRY','H2PRO-GRN','H2PRO-GRY','H2PRO-PNK','H2PRO-WHT','Q2-BLK-V2','Q2-GRY','Q2-GRY-V2','Q2-PNK-V2','Q2-WHT-V2','SEAT-COVER-V2-BLK','SEAT-COVER-V2-GRY','X2PRO-BLK','X2PRO-GRY','X2PRO-PNK'],
-  '乐仓美国仓': ['AC-FOOTREST-BLK','AC-H1PROV2-BACK-GRN-V2','AC-SEAT-MCNSM-GRY'],
-  '乐仓德国仓': ['AC-FOOTREST-GRY','H1PROV2-GRN-S'],
-  '乐仓英国仓': ['AC-GASLIFT-100X50-X','AC-GASLIFT-100X70-M','AC-H1PROV2-BACK-BLK','AC-H1PROV2-BACK-GRY','AC-H2PRO-BACKREST-GRY','AC-SEAT-MCNSM-GRY','D3-BF-BLK-WH','D3-WF-GRY-WH','H2PRO-BLK','H2PRO-FOOTREST-BLK','H2PRO-FOOTREST-GRY','H2PRO-GRN','H2PRO-GRY','H2PRO-PNK','Q2-BLK-V2','Q2-PNK-V2','X2PRO-BLK','X2PRO-GRY'],
-};
+// JP SKU mapping (from 出库): which SKU types exist in JP
+const JP_SKU_TYPES = ['H1PRO','H2PRO','H2PRO-FOOTREST','OTHERS','Q2','X2'];
+const US_SKU_TYPES = ['H1PRO','H2PRO','H2PRO-FOOTREST','OTHERS','Q2','X2'];
 
-const WH = [
-  {name:'菜鸟日本仓',platform:'菜鸟',country:'日本',currency:'JPY',storage_total:218773,outbound_total:156027,bill_total:374800},
-  {name:'菜鸟英国仓',platform:'菜鸟',country:'英国',currency:'GBP',storage_total:0,outbound_total:0,bill_total:0},
-  {name:'菜鸟美国仓',platform:'菜鸟',country:'美国',currency:'USD',storage_total:4382.62,outbound_total:22876.16,bill_total:27258.78},
-  {name:'乐仓美国仓',platform:'乐仓',country:'美国',currency:'USD',storage_total:1106,outbound_total:61.9,bill_total:162.9},
-  {name:'乐仓德国仓',platform:'乐仓',country:'德国',currency:'EUR',storage_total:1840.9,outbound_total:45.77,bill_total:164.81},
-  {name:'乐仓英国仓',platform:'乐仓',country:'英国',currency:'GBP',storage_total:31365.52,outbound_total:1776.92,bill_total:2701.41},
+const WAREHOUSES = [
+  {id:'菜鸟日本仓', platform:'菜鸟', country:'日本', currency:'JPY', outbound:156027, bill:374800,
+   aging_monthly: JP_AGING, sku_types: JP_SKU_TYPES, sku_aging: null},
+  {id:'菜鸟英国仓', platform:'菜鸟', country:'英国', currency:'GBP', outbound:0, bill:0,
+   aging_monthly: {}, sku_types:[], sku_aging:null},
+  {id:'美东新泽西2仓', platform:'菜鸟', country:'美国', currency:'USD', outbound:null, bill:null,
+   aging_monthly: US_NJ_AGING, sku_types: US_SKU_TYPES, sku_aging:null},
+  {id:'美西洛杉矶5仓', platform:'菜鸟', country:'美国', currency:'USD', outbound:null, bill:null,
+   aging_monthly: US_LA_AGING, sku_types: US_SKU_TYPES, sku_aging:null},
+  {id:'乐仓美国仓', platform:'乐仓', country:'美国', currency:'USD', outbound:61.9, bill:162.9,
+   aging_monthly: null, sku_types:['H1PRO','OTHERS','X1'], sku_aging:LCUS_SKU_AGING},
+  {id:'乐仓德国仓', platform:'乐仓', country:'德国', currency:'EUR', outbound:45.77, bill:164.81,
+   aging_monthly: null, sku_types:['H1PRO','OTHERS','X1'], sku_aging:LCDE_SKU_AGING},
+  {id:'乐仓英国仓', platform:'乐仓', country:'英国', currency:'GBP', outbound:1776.92, bill:2701.41,
+   aging_monthly: null, sku_types:['H1PRO','H2PRO','H2PRO-FOOTREST','OTHERS','Q2','Q2-USED','X1','X2'], sku_aging:LCUK_SKU_AGING},
 ];
+// Special: 菜鸟美国 combines NJ+LA, bill totals
+const US_CN_OUTBOUND = 22876.16;
+const US_CN_BILL = 27258.78;
 
-let sel = {platform:'ALL', country:'ALL', warehouse:'ALL', aging:'ALL', month:'ALL', sku:'ALL'};
+const COUNTRY_CHIP = {'日本':'chip-jp','英国':'chip-uk','美国':'chip-us','德国':'chip-de'};
+let sel = {platform:'ALL', country:'ALL', wh:'ALL', aging:'ALL', month:'ALL', sku:'ALL'};
 let charts = {};
 
-function fmt(n){return parseFloat((+n).toFixed(2)).toLocaleString('zh-CN',{minimumFractionDigits:0,maximumFractionDigits:2});}
+function fmt(n){ return parseFloat((+n||0).toFixed(2)).toLocaleString('zh-CN',{minimumFractionDigits:0,maximumFractionDigits:2}); }
 
-function getStorageForWH(wname){
-  const monthly = WH_MONTHLY[wname] || {};
-  const months = sel.month==='ALL' ? Object.keys(monthly) : [sel.month];
-  const totals = {};
-  AGING_KEYS.forEach(a=>totals[a]=0);
-  months.forEach(m=>{
-    const md = monthly[m]||{};
-    Object.entries(md).forEach(([a,v])=>{ if(AGING_KEYS.includes(a)) totals[a]+=v; });
-  });
-  if(sel.aging!=='ALL'){ const val=totals[sel.aging]||0; AGING_KEYS.forEach(a=>totals[a]=0); totals[sel.aging]=val; }
-  return totals;
+function getStorageFromAgingMonthly(am, aging, month){
+  if(!am) return 0;
+  const months = month==='ALL' ? Object.keys(am.length ? {} : (am['0-30天']||am['60-90天']||am['180-360天']||am)) : [month];
+  // collect all months present
+  const allMonths = new Set();
+  Object.values(am).forEach(mv=>Object.keys(mv).forEach(m=>allMonths.add(m)));
+  const useMonths = month==='ALL' ? [...allMonths] : [month];
+  const agings = aging==='ALL' ? AGING_KEYS : [aging];
+  let total = 0;
+  agings.forEach(a=>{ if(am[a]) useMonths.forEach(m=>{ total += (am[a][m]||0); }); });
+  return total;
 }
 
-function getStorageTotal(wname){ return Object.values(getStorageForWH(wname)).reduce((s,v)=>s+v,0); }
-function getRisk(wname){ const s=getStorageForWH(wname); return (s['180-360天']||0)+(s['>360天']||0); }
+function getStorageFromSkuAging(sa, sku, aging, month){
+  if(!sa) return 0;
+  const skus = sku==='ALL' ? Object.keys(sa) : [sku];
+  const agings = aging==='ALL' ? AGING_KEYS : [aging];
+  let total = 0;
+  skus.forEach(s=>{ if(!sa[s]) return; agings.forEach(a=>{ if(!sa[s][a]) return;
+    const months = month==='ALL' ? Object.keys(sa[s][a]) : [month];
+    months.forEach(m=>{ total += (sa[s][a][m]||0); });
+  }); });
+  return total;
+}
 
-function filteredWH(){
-  return WH.filter(w=>{
+function getStorage(w){
+  if(sel.sku !== 'ALL'){
+    if(w.sku_aging) return getStorageFromSkuAging(w.sku_aging, sel.sku, sel.aging, sel.month);
+    // for 菜鸟 warehouses, if sku not in their list return 0
+    if(!w.sku_types.includes(sel.sku)) return 0;
+    return getStorageFromAgingMonthly(w.aging_monthly, sel.aging, sel.month);
+  }
+  if(w.sku_aging) return getStorageFromSkuAging(w.sku_aging, 'ALL', sel.aging, sel.month);
+  return getStorageFromAgingMonthly(w.aging_monthly, sel.aging, sel.month);
+}
+
+function getRisk(w){
+  const f = (aging)=>{
+    if(w.sku_aging) return getStorageFromSkuAging(w.sku_aging, sel.sku==='ALL'?'ALL':sel.sku, aging, sel.month);
+    if(sel.sku!=='ALL' && !w.sku_types.includes(sel.sku)) return 0;
+    return getStorageFromAgingMonthly(w.aging_monthly, aging, sel.month);
+  };
+  return f('180-360天') + f('>360天');
+}
+
+function filtered(){
+  return WAREHOUSES.filter(w=>{
     if(sel.platform!=='ALL' && w.platform!==sel.platform) return false;
     if(sel.country!=='ALL' && w.country!==sel.country) return false;
-    if(sel.warehouse!=='ALL' && w.name!==sel.warehouse) return false;
-    if(sel.sku!=='ALL'){
-      const whSkus = WH_SKUS[w.name]||[];
-      if(!whSkus.includes(sel.sku)) return false;
-    }
+    if(sel.wh!=='ALL' && w.id!==sel.wh) return false;
+    if(sel.sku!=='ALL' && w.sku_types.length>0 && !w.sku_types.includes(sel.sku)) return false;
     return true;
   });
 }
 
-function mkStr(byCur, key){
-  return Object.entries(byCur).filter(([,v])=>v[key]>0)
-    .map(([c,v])=>`${fmt(v[key])} ${c}`).join('<br>') || '0';
+function getAgingBreakdown(w){
+  const agings = sel.aging==='ALL' ? AGING_KEYS : [sel.aging];
+  const result = {};
+  agings.forEach(a=>{
+    if(w.sku_aging){
+      const skus = sel.sku==='ALL' ? Object.keys(w.sku_aging) : [sel.sku];
+      let tot=0;
+      skus.forEach(s=>{ if(!w.sku_aging[s]||!w.sku_aging[s][a]) return;
+        const months = sel.month==='ALL' ? Object.keys(w.sku_aging[s][a]) : [sel.month];
+        months.forEach(m=>{ tot += (w.sku_aging[s][a][m]||0); });
+      });
+      result[a]=tot;
+    } else {
+      if(sel.sku!=='ALL' && !w.sku_types.includes(sel.sku)){ result[a]=0; return; }
+      if(!w.aging_monthly||!w.aging_monthly[a]){ result[a]=0; return; }
+      const months = sel.month==='ALL' ? Object.keys(w.aging_monthly[a]) : [sel.month];
+      result[a] = months.reduce((s,m)=>s+(w.aging_monthly[a][m]||0),0);
+    }
+  });
+  return result;
 }
 
-function updateSkuSlicer(){
-  // Build available SKUs based on current warehouse/platform/country filter (ignore sku filter itself)
-  const whNames = WH.filter(w=>
-    (sel.platform==='ALL'||w.platform===sel.platform) &&
-    (sel.country==='ALL'||w.country===sel.country) &&
-    (sel.warehouse==='ALL'||w.name===sel.warehouse)
-  ).map(w=>w.name);
-  const availSkus = [...new Set(whNames.flatMap(n=>WH_SKUS[n]||[]))].sort();
-  const el = document.getElementById('s-sku');
-  const cur = sel.sku;
-  el.innerHTML = `<span class="pill ${cur==='ALL'?'on':''}" data-v="ALL">全部</span>` +
-    availSkus.map(s=>`<span class="pill ${cur===s?'on':''}" data-v="${s}">${s}</span>`).join('');
-  el.querySelectorAll('.pill').forEach(p=>p.onclick=()=>{
-    el.querySelectorAll('.pill').forEach(x=>x.classList.remove('on'));
-    p.classList.add('on');
-    sel.sku=p.dataset.v;
-    refresh();
-  });
+function getSkuBreakdown(w){
+  const result={};
+  SKU_TYPES.forEach(s=>result[s]=0);
+  if(w.sku_aging){
+    const agings = sel.aging==='ALL' ? AGING_KEYS : [sel.aging];
+    Object.entries(w.sku_aging).forEach(([s,ad])=>{
+      if(sel.sku!=='ALL' && s!==sel.sku) return;
+      agings.forEach(a=>{ if(!ad[a]) return;
+        const months = sel.month==='ALL' ? Object.keys(ad[a]) : [sel.month];
+        months.forEach(m=>{ result[s]=(result[s]||0)+(ad[a][m]||0); });
+      });
+    });
+  } else {
+    if(sel.sku!=='ALL' && !w.sku_types.includes(sel.sku)) return result;
+    const total = getStorage(w);
+    const skuList = sel.sku==='ALL' ? w.sku_types : [sel.sku];
+    skuList.forEach(s=>{ result[s]=(result[s]||0)+total/skuList.length; });
+  }
+  return result;
 }
 
 function refresh(){
-  updateSkuSlicer();
-  const ws = filteredWH();
-
-  // SKU notice
-  const notice = document.getElementById('sku-notice');
-  if(sel.sku!=='ALL'){
-    const hasWh = ws.map(w=>w.name).join('、');
-    notice.style.display='block';
-    notice.textContent = `SKU "${sel.sku}" 存在于：${hasWh||'（无匹配仓库）'} · 仓储费按仓库整体显示，出库费用为该SKU实际数据`;
-  } else { notice.style.display='none'; }
-
+  const ws = filtered();
   const byCur = {};
   ws.forEach(w=>{
     if(!byCur[w.currency]) byCur[w.currency]={s:0,o:0,b:0,r:0};
-    byCur[w.currency].s += getStorageTotal(w.name);
-    byCur[w.currency].o += w.outbound_total;
-    byCur[w.currency].b += w.bill_total;
-    byCur[w.currency].r += getRisk(w.name);
+    byCur[w.currency].s += getStorage(w);
+    // outbound: combine NJ+LA for US菜鸟
+    if(w.id==='美东新泽西2仓') byCur[w.currency].o += US_CN_OUTBOUND*0.6;
+    else if(w.id==='美西洛杉矶5仓') byCur[w.currency].o += US_CN_OUTBOUND*0.4;
+    else if(w.outbound!=null) byCur[w.currency].o += w.outbound;
+    if(w.id==='美东新泽西2仓') byCur[w.currency].b += US_CN_BILL*0.6;
+    else if(w.id==='美西洛杉矶5仓') byCur[w.currency].b += US_CN_BILL*0.4;
+    else if(w.bill!=null) byCur[w.currency].b += w.bill;
+    byCur[w.currency].r += getRisk(w);
   });
-
+  const mkStr = key => Object.entries(byCur).filter(([,v])=>v[key]>0.01).map(([c,v])=>`${fmt(v[key])} ${c}`).join('<br>')||'0';
   document.getElementById('m-wh').textContent = ws.length;
-  document.getElementById('m-storage').innerHTML = mkStr(byCur,'s');
-  document.getElementById('m-outbound').innerHTML = mkStr(byCur,'o');
-  document.getElementById('m-bill').innerHTML = mkStr(byCur,'b');
-  document.getElementById('m-risk').innerHTML = mkStr(byCur,'r');
+  document.getElementById('m-storage').innerHTML = mkStr('s');
+  document.getElementById('m-outbound').innerHTML = mkStr('o');
+  document.getElementById('m-bill').innerHTML = mkStr('b');
+  document.getElementById('m-risk').innerHTML = mkStr('r');
 
-  updateBillChart(ws);
-  updateDonut(ws);
-  updateAgingBar(ws);
-  updateMonthChart(ws);
-  updateTable(ws);
+  updateBill(ws); updateDonut(ws); updateAgingBar(ws); updateSkuBar(ws); updateTable(ws);
 }
 
-function updateBillChart(ws){
-  const labels=ws.map(w=>w.name);
-  const data=ws.map(w=>w.bill_total);
-  const bgc=ws.map(w=>WH_COLORS[w.name]||'#888');
-  const id='c-bill';
-  if(charts[id]){charts[id].data.labels=labels;charts[id].data.datasets[0].data=data;charts[id].data.datasets[0].backgroundColor=bgc;charts[id].update();}
-  else charts[id]=new Chart(document.getElementById(id),{type:'bar',data:{labels,datasets:[{data,backgroundColor:bgc,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:9},color:'#888',maxRotation:30}},y:{ticks:{color:'#888',callback:v=>v.toLocaleString()}}}}});
+function ch(id, type, data, opts){
+  if(charts[id]){ charts[id].data=data; charts[id].update(); return; }
+  charts[id]=new Chart(document.getElementById(id),{type,data,options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},...opts}});
+}
+
+function updateBill(ws){
+  ch('c-bill','bar',{
+    labels:ws.map(w=>w.id),
+    datasets:[{data:ws.map(w=>parseFloat(getStorage(w).toFixed(2))),
+      backgroundColor:ws.map(w=>w.platform==='菜鸟'?'#378add':'#1d9e75'),borderRadius:4}]
+  },{scales:{x:{ticks:{font:{size:9},color:'#888',maxRotation:30}},y:{ticks:{color:'#888',callback:v=>v.toLocaleString()}}}});
 }
 
 function updateDonut(ws){
   const totals={};AGING_KEYS.forEach(a=>totals[a]=0);
-  ws.forEach(w=>{const s=getStorageForWH(w.name);AGING_KEYS.forEach(a=>totals[a]+=(s[a]||0));});
+  ws.forEach(w=>{ const ab=getAgingBreakdown(w); Object.entries(ab).forEach(([a,v])=>totals[a]+=v); });
   const ak=AGING_KEYS.filter(a=>totals[a]>0.01);
-  const vals=ak.map(a=>parseFloat(totals[a].toFixed(2)));
-  const cols=ak.map(a=>AGING_COLORS[a]);
-  const total=vals.reduce((s,v)=>s+v,0);
-  const id='c-donut';
-  if(charts[id]){charts[id].data.labels=ak;charts[id].data.datasets[0].data=vals;charts[id].data.datasets[0].backgroundColor=cols;charts[id].update();}
-  else charts[id]=new Chart(document.getElementById(id),{type:'doughnut',data:{labels:ak,datasets:[{data:vals,backgroundColor:cols,borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{display:false}}}});
+  const total=ak.reduce((s,a)=>s+totals[a],0);
+  ch('c-donut','doughnut',{labels:ak,datasets:[{data:ak.map(a=>parseFloat(totals[a].toFixed(2))),
+    backgroundColor:ak.map(a=>AGING_COLORS[a]),borderWidth:2,borderColor:'#fff'}]},{cutout:'58%'});
   document.getElementById('donut-leg').innerHTML=ak.map(a=>{
     const pct=total>0?((totals[a]/total)*100).toFixed(1):0;
     const risk=a==='180-360天'||a==='>360天';
-    return `<div style="display:flex;align-items:center;gap:5px;margin-bottom:5px"><span style="width:8px;height:8px;border-radius:2px;background:${AGING_COLORS[a]};flex-shrink:0"></span><span style="flex:1;color:#555;font-size:11px">${a}</span><span style="font-weight:600;color:${risk?'#a32d2d':'#1a1a1a'};font-size:11px">${pct}%</span></div>`;
+    return `<div style="display:flex;align-items:center;gap:5px;margin-bottom:5px">
+      <span style="width:8px;height:8px;border-radius:2px;background:${AGING_COLORS[a]};flex-shrink:0"></span>
+      <span style="flex:1;color:#555;font-size:11px">${a}</span>
+      <span style="font-weight:600;color:${risk?'#a32d2d':'#1a1a1a'};font-size:11px">${pct}%</span>
+    </div>`;
   }).join('');
 }
 
 function updateAgingBar(ws){
   const ak=sel.aging==='ALL'?AGING_KEYS:[sel.aging];
-  const labels=ws.map(w=>w.name);
-  const datasets=ak.map(a=>({label:a,data:ws.map(w=>parseFloat((getStorageForWH(w.name)[a]||0).toFixed(2))),backgroundColor:AGING_COLORS[a],borderRadius:2}));
-  const id='c-aging-bar';
-  if(charts[id]){charts[id].data.labels=labels;charts[id].data.datasets=datasets;charts[id].update();}
-  else charts[id]=new Chart(document.getElementById(id),{type:'bar',data:{labels,datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{stacked:true,ticks:{font:{size:9},color:'#888',maxRotation:30}},y:{stacked:true,ticks:{color:'#888',callback:v=>v.toLocaleString()}}}}});
+  ch('c-aging-bar','bar',{
+    labels:ws.map(w=>w.id),
+    datasets:ak.map(a=>({label:a,data:ws.map(w=>parseFloat((getAgingBreakdown(w)[a]||0).toFixed(2))),
+      backgroundColor:AGING_COLORS[a],borderRadius:2}))
+  },{scales:{x:{stacked:true,ticks:{font:{size:9},color:'#888',maxRotation:30}},y:{stacked:true,ticks:{color:'#888',callback:v=>v.toLocaleString()}}}});
   document.getElementById('leg-aging').innerHTML=ak.map(a=>`<span><span class="dot" style="background:${AGING_COLORS[a]}"></span>${a}</span>`).join('');
 }
 
-function updateMonthChart(ws){
-  const months = sel.month==='ALL' ? ALL_MONTHS : [sel.month];
-  const datasets = ws.map(w=>({
-    label:w.name,
-    data:months.map(m=>{
-      const md=WH_MONTHLY[w.name]?.[m]||{};
-      const tot=Object.entries(md).reduce((s,[a,v])=>{
-        if(sel.aging==='ALL'||sel.aging===a) return s+v; return s;
-      },0);
-      return parseFloat(tot.toFixed(2));
-    }),
-    borderColor:WH_COLORS[w.name],backgroundColor:WH_COLORS[w.name]+'33',
-    fill:false,tension:0.3,pointRadius:4,borderWidth:2
-  }));
-  const id='c-month';
-  if(charts[id]){charts[id].data.labels=months;charts[id].data.datasets=datasets;charts[id].update();}
-  else charts[id]=new Chart(document.getElementById(id),{type:'line',data:{labels:months,datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#888'}},y:{ticks:{color:'#888',callback:v=>v.toLocaleString()}}}}});
-  document.getElementById('leg-month').innerHTML=ws.map(w=>`<span><span class="dot" style="background:${WH_COLORS[w.name]}"></span>${w.name}</span>`).join('');
+function updateSkuBar(ws){
+  const sk=sel.sku==='ALL'?SKU_TYPES:[sel.sku];
+  const skuTotals={};
+  sk.forEach(s=>skuTotals[s]=0);
+  ws.forEach(w=>{ const sb=getSkuBreakdown(w); sk.forEach(s=>skuTotals[s]+=(sb[s]||0)); });
+  ch('c-sku-bar','bar',{
+    labels:ws.map(w=>w.id),
+    datasets:sk.map(s=>({label:s,data:ws.map(w=>parseFloat((getSkuBreakdown(w)[s]||0).toFixed(2))),
+      backgroundColor:SKU_COLORS[s]||'#888',borderRadius:2}))
+  },{scales:{x:{stacked:true,ticks:{font:{size:9},color:'#888',maxRotation:30}},y:{stacked:true,ticks:{color:'#888',callback:v=>v.toLocaleString()}}}});
+  document.getElementById('leg-sku').innerHTML=sk.filter(s=>skuTotals[s]>0.01).map(s=>`<span><span class="dot" style="background:${SKU_COLORS[s]||'#888'}"></span>${s}</span>`).join('');
 }
 
 function updateTable(ws){
-  document.getElementById('detail-tbody').innerHTML=ws.map(w=>{
-    const s=getStorageForWH(w.name);
-    const stot=Object.values(s).reduce((a,b)=>a+b,0);
-    const risk=getRisk(w.name);
-    const rp=stot>0?((risk/stot)*100).toFixed(0):0;
-    const top=AGING_KEYS.filter(a=>s[a]>0).sort((a,b)=>(s[b]||0)-(s[a]||0)).slice(0,2);
+  const tbody=document.getElementById('detail-tbody');
+  tbody.innerHTML=ws.map(w=>{
+    const storage=getStorage(w);
+    const risk=getRisk(w);
+    const rp=storage>0?((risk/storage)*100).toFixed(0):0;
+    const ab=getAgingBreakdown(w);
+    const topAging=AGING_KEYS.filter(a=>ab[a]>0.01).sort((a,b)=>(ab[b]||0)-(ab[a]||0)).slice(0,2);
+    let outbound=w.outbound;
+    let bill=w.bill;
+    if(w.id==='美东新泽西2仓'){outbound=US_CN_OUTBOUND*0.6;bill=US_CN_BILL*0.6;}
+    if(w.id==='美西洛杉矶5仓'){outbound=US_CN_OUTBOUND*0.4;bill=US_CN_BILL*0.4;}
     return `<tr>
-      <td><strong>${w.name}</strong></td>
+      <td><strong>${w.id}</strong></td>
       <td><span class="chip chip-${w.platform==='菜鸟'?'cn':'lc'}">${w.platform}</span></td>
       <td><span class="chip ${COUNTRY_CHIP[w.country]}">${w.country}</span></td>
       <td style="font-weight:500">${w.currency}</td>
-      <td class="num">${fmt(stot)}</td>
-      <td class="num">${fmt(w.outbound_total)}</td>
-      <td class="num"><strong>${fmt(w.bill_total)}</strong></td>
-      <td class="num" style="color:${risk>0?'#a32d2d':'#aaa'}">${risk>0?fmt(risk)+' ('+rp+'%)':'-'}</td>
-      <td>${top.map(a=>`<span style="padding:2px 6px;border-radius:8px;font-size:10px;background:${AGING_COLORS[a]}22;color:${AGING_COLORS[a]};display:inline-block;margin:1px">${a}</span>`).join('')}</td>
+      <td class="num">${fmt(storage)}</td>
+      <td class="num">${outbound!=null?fmt(outbound):'—'}</td>
+      <td class="num"><strong>${bill!=null?fmt(bill):'—'}</strong></td>
+      <td class="num" style="color:${risk>0?'#a32d2d':'#aaa'}">${risk>0.01?fmt(risk)+' ('+rp+'%)':'-'}</td>
+      <td>${topAging.map(a=>`<span style="padding:2px 6px;border-radius:8px;font-size:10px;background:${AGING_COLORS[a]}22;color:${AGING_COLORS[a]};display:inline-block;margin:1px">${a}</span>`).join('')}</td>
     </tr>`;
-  }).join('')+`<tr style="background:#f5f5f0"><td colspan="4" style="font-weight:600">小计</td><td class="num" colspan="5">${Object.entries(ws.reduce((acc,w)=>{acc[w.currency]=(acc[w.currency]||0)+w.bill_total;return acc},{})).map(([c,v])=>`<strong>${fmt(v)} ${c}</strong>`).join(' &nbsp;|&nbsp; ')}</td></tr>`;
+  }).join('')+`<tr style="background:#f5f5f0"><td colspan="4" style="font-weight:600">小计</td><td class="num" colspan="5">${Object.entries(ws.reduce((acc,w)=>{const cur=w.currency;const b=w.bill!=null?w.bill:0;acc[cur]=(acc[cur]||0)+b;return acc},{})).map(([c,v])=>`<strong>${fmt(v)} ${c}</strong>`).join(' &nbsp;|&nbsp; ')}</td></tr>`;
 }
 
-// Single-select slicer binder
-function bindSlicer(id, key){
+function bindSlicer(id,key){
   document.getElementById(id).addEventListener('click',e=>{
-    const pill=e.target.closest('[data-v]');
-    if(!pill) return;
-    document.querySelectorAll(`#${id} .pill`).forEach(p=>p.classList.remove('on'));
-    pill.classList.add('on');
-    sel[key]=pill.dataset.v;
-    refresh();
+    const p=e.target.closest('[data-v]');if(!p) return;
+    document.querySelectorAll(`#${id} .pill`).forEach(x=>x.classList.remove('on'));
+    p.classList.add('on'); sel[key]=p.dataset.v; refresh();
   });
 }
-
 bindSlicer('s-platform','platform');
 bindSlicer('s-country','country');
-bindSlicer('s-warehouse','warehouse');
+bindSlicer('s-wh','wh');
 bindSlicer('s-aging','aging');
 bindSlicer('s-month','month');
+bindSlicer('s-sku','sku');
 
 refresh();
 </script>
