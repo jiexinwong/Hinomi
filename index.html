@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HINOMI — 菜鸟仓 仓储费用报表 2026-02</title>
+<title>HINOMI — 全球仓储费用报表 2026-02</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -11,8 +11,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .header{background:#fff;border-bottom:1px solid #e0dfd8;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
 .header h1{font-size:16px;font-weight:600}
 .header .meta{font-size:11px;color:#888;margin-top:2px}
+.htags{display:flex;gap:6px}
+.htag{font-size:11px;padding:3px 10px;border-radius:20px;font-weight:500}
+.htag-cn{background:#e6f1fb;color:#0c447c}
+.htag-lc{background:#eaf3de;color:#3b6d11}
 .body{padding:14px 24px;max-width:1440px;margin:0 auto}
-
 .slicer-bar{background:#fff;border:1px solid #e0dfd8;border-radius:12px;padding:12px 16px;margin-bottom:12px}
 .slicer-row{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start;margin-bottom:10px}
 .slicer-row:last-child{margin-bottom:0}
@@ -25,20 +28,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .pill.on{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
 .pill.sel{background:#e8f4e8;color:#27500a;border-color:#97c459;font-weight:500}
 .divider{border:none;border-top:1px dashed #e0dfd8;margin:10px 0}
-
 .view-row{display:flex;align-items:center;gap:8px;margin-bottom:12px}
 .vtab{padding:5px 14px;font-size:12px;font-weight:500;border:1px solid #d5d4cc;border-radius:8px;cursor:pointer;background:#fff;color:#555;transition:all .12s}
 .vtab.on{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
 .vl{font-size:11px;color:#888}
-
 .metrics{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:12px}
 .mc{background:#fff;border:1px solid #e0dfd8;border-radius:10px;padding:11px 13px}
 .mc .lbl{font-size:10px;color:#888;margin-bottom:3px;font-weight:500}
-.mc .val{font-size:17px;font-weight:600;color:#1a1a1a;line-height:1.2}
+.mc .val{font-size:16px;font-weight:600;color:#1a1a1a;line-height:1.3}
 .mc .sub{font-size:10px;color:#aaa;margin-top:2px}
 .mc.warn{border-color:#f09595;background:#fff8f8}
 .mc.warn .val{color:#a32d2d}
-
 .charts-row{display:grid;grid-template-columns:2fr 1fr;gap:12px;margin-bottom:12px}
 .card{background:#fff;border:1px solid #e0dfd8;border-radius:12px;padding:14px 16px}
 .card-title{font-size:12px;font-weight:600;color:#1a1a1a;margin-bottom:10px}
@@ -46,8 +46,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .legend{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
 .legend span{display:flex;align-items:center;gap:4px;font-size:10px;color:#555}
 .legend .dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
-
-.tbl-wrap{overflow-x:auto;max-height:480px;overflow-y:auto}
+.tbl-wrap{overflow-x:auto;max-height:500px;overflow-y:auto}
 table{width:100%;border-collapse:collapse;font-size:11px}
 th{background:#f5f5f0;padding:6px 9px;text-align:left;font-weight:600;color:#666;border-bottom:1px solid #e0dfd8;white-space:nowrap;position:sticky;top:0;z-index:1}
 td{padding:5px 9px;border-bottom:1px solid #f0efe8;color:#333}
@@ -59,23 +58,33 @@ tr:hover td{background:#fafaf8}
 .chip-uk{background:#fbeaf0;color:#72243e}
 .chip-us{background:#eaf3de;color:#27500a}
 .chip-de{background:#faeeda;color:#633806}
+.chip-cn{background:#e6f1fb;color:#185fa5}
+.chip-lc{background:#eaf3de;color:#3b6d11}
 footer{text-align:center;font-size:11px;color:#bbb;padding:12px}
-
-.note{font-size:10px;color:#888;background:#fafaf8;border:1px solid #e8e7e0;border-radius:6px;padding:6px 10px;margin-bottom:10px}
 </style>
 </head>
 <body>
 <div class="header">
   <div>
-    <h1>HINOMI — 菜鸟仓 仓储费用报表</h1>
-    <div class="meta">数据来源：WRF 仓租列表 &nbsp;·&nbsp; 2026-01 / 2026-02 &nbsp;·&nbsp; AC-/RMA→OTHERS · X2PRO-BLK-CUSTOM→X2 · H2PRO-BLK-LR-USED-REST→H2PRO-USED</div>
+    <h1>HINOMI — 全球仓储费用报表</h1>
+    <div class="meta">菜鸟 WRF 仓租列表 + 乐仓系统费用 &nbsp;·&nbsp; 账单月份：2026-02（基于计费时间） &nbsp;·&nbsp; 8个仓库</div>
+  </div>
+  <div class="htags">
+    <span class="htag htag-cn">菜鸟仓</span>
+    <span class="htag htag-lc">乐仓</span>
   </div>
 </div>
-
 <div class="body">
-
 <div class="slicer-bar">
   <div class="slicer-row">
+    <div class="sg">
+      <div class="sl">平台 <em>单选</em></div>
+      <div class="pills" id="s-platform">
+        <span class="pill on" data-v="ALL">全部</span>
+        <span class="pill" data-v="菜鸟">菜鸟</span>
+        <span class="pill" data-v="乐仓">乐仓</span>
+      </div>
+    </div>
     <div class="sg">
       <div class="sl">国家 <em>单选</em></div>
       <div class="pills" id="s-country">
@@ -92,15 +101,17 @@ footer{text-align:center;font-size:11px;color:#bbb;padding:12px}
         <span class="pill on" data-v="ALL">全部</span>
         <span class="pill" data-v="日本大阪1仓">日本大阪1仓</span>
         <span class="pill" data-v="英国莱斯特1仓">英国莱斯特1仓</span>
-        <span class="pill" data-v="美东新泽西2仓">美东新泽西2仓</span>
-        <span class="pill" data-v="美西洛杉矶5仓">美西洛杉矶5仓</span>
+        <span class="pill" data-v="美东新泽西2仓">美东NJ</span>
+        <span class="pill" data-v="美西洛杉矶5仓">美西LA</span>
         <span class="pill" data-v="德国法兰克福2仓">德国法兰克福2仓</span>
+        <span class="pill" data-v="乐仓美国仓">乐仓美国</span>
+        <span class="pill" data-v="乐仓德国仓">乐仓德国</span>
+        <span class="pill" data-v="乐仓英国仓">乐仓英国</span>
       </div>
     </div>
     <div class="sg">
       <div class="sl">月份 <em>多选</em></div>
       <div class="pills" id="s-month">
-        <span class="pill sel" data-v="2026-01">2026-01</span>
         <span class="pill sel" data-v="2026-02">2026-02</span>
       </div>
     </div>
@@ -125,21 +136,18 @@ footer{text-align:center;font-size:11px;color:#bbb;padding:12px}
     </div>
   </div>
 </div>
-
 <div class="view-row">
   <span class="vl">主图视角：</span>
   <span class="vtab on" id="vt-sku" onclick="setView('sku')">SKU 为主轴</span>
   <span class="vtab" id="vt-wh" onclick="setView('wh')">仓库 为主轴</span>
 </div>
-
 <div class="metrics">
   <div class="mc"><div class="lbl">筛选 SKU 数</div><div class="val" id="m-sku">—</div><div class="sub">型号</div></div>
-  <div class="mc"><div class="lbl">仓储费合计</div><div class="val" id="m-total" style="font-size:13px">—</div><div class="sub">各币种</div></div>
-  <div class="mc warn"><div class="lbl">⚠ 180天+ 高风险</div><div class="val" id="m-risk" style="font-size:13px">—</div><div class="sub" id="m-risk-sub">占比</div></div>
+  <div class="mc"><div class="lbl">仓储费合计</div><div class="val" id="m-total" style="font-size:12px;line-height:1.5">—</div><div class="sub">各币种</div></div>
+  <div class="mc warn"><div class="lbl">⚠ 180天+ 高风险</div><div class="val" id="m-risk" style="font-size:12px;line-height:1.5">—</div><div class="sub" id="m-risk-sub">占比</div></div>
   <div class="mc"><div class="lbl">最高费用 SKU</div><div class="val" id="m-topsku" style="font-size:13px">—</div><div class="sub" id="m-topsku-v">—</div></div>
-  <div class="mc"><div class="lbl">最高费用仓库</div><div class="val" id="m-topwh" style="font-size:11px;line-height:1.4">—</div><div class="sub" id="m-topwh-v">—</div></div>
+  <div class="mc"><div class="lbl">最高费用仓库</div><div class="val" id="m-topwh" style="font-size:11px;line-height:1.5">—</div><div class="sub" id="m-topwh-v">—</div></div>
 </div>
-
 <div class="charts-row">
   <div class="card">
     <div class="card-title" id="main-title">SKU 型号 × 仓库（仓储费）</div>
@@ -152,147 +160,75 @@ footer{text-align:center;font-size:11px;color:#bbb;padding:12px}
     <div id="donut-leg" style="margin-top:8px;font-size:11px"></div>
   </div>
 </div>
-
 <div class="card" style="margin-bottom:12px">
   <div class="card-title">明细表 — SKU × 仓库 × 月份 × 库龄段（仓储费）</div>
   <div class="tbl-wrap">
-    <table>
-      <thead id="tbl-head"></thead>
-      <tbody id="tbl-body"></tbody>
-    </table>
+    <table><thead id="tbl-head"></thead><tbody id="tbl-body"></tbody></table>
   </div>
 </div>
-
 </div>
-<footer>HINOMI PTE. LTD. · 菜鸟仓 仓储费用报表 · 数据来源 WRF 仓租列表 · AC-/RMA 开头→OTHERS · X2PRO-BLK-CUSTOM→X2 · H2PRO-BLK-LR-USED-REST→H2PRO-USED · CHAIR-CASTER/展厅家具→OTHERS</footer>
-
+<footer>HINOMI PTE. LTD. · 全球仓储费用报表 2026-02 · 菜鸟 WRF + 乐仓系统费用 · AC-/RMA→OTHERS · X2PRO-BLK-CUSTOM→X2 · H2PRO-BLK-LR-USED-REST→H2PRO-USED</footer>
 <script>
-const AGING_KEYS = ['0-30天','30-60天','60-90天','90-120天','120-180天','180-360天','>360天'];
-const AGING_C = {'0-30天':'#888780','30-60天':'#1d9e75','60-90天':'#7f77dd','90-120天':'#d4537e','120-180天':'#378add','180-360天':'#ef9f27','>360天':'#e24b4a'};
-const WH_META = {
-  '日本大阪1仓':   {country:'日本', cur:'JPY', chip:'chip-jp', color:'#378add'},
-  '英国莱斯特1仓': {country:'英国', cur:'GBP', chip:'chip-uk', color:'#7f77dd'},
-  '美东新泽西2仓': {country:'美国', cur:'USD', chip:'chip-us', color:'#1d9e75'},
-  '美西洛杉矶5仓': {country:'美国', cur:'USD', chip:'chip-us', color:'#5dcaa5'},
-  '德国法兰克福2仓':{country:'德国', cur:'EUR', chip:'chip-de', color:'#ef9f27'},
-};
-const ALL_WH = Object.keys(WH_META);
-const ALL_MONTHS = ['2026-01','2026-02'];
-
-// ===== REAL DATA from WRF files (verified) =====
-const RAW = {"日本大阪1仓": {"H1PRO": {"180-360天": {"2026-01": 277, "2026-02": 3742}}, "H2PRO": {"180-360天": {"2026-01": 1822, "2026-02": 42388}, "60-90天": {"2026-01": 1165, "2026-02": 16310}, "90-120天": {"2026-02": 17420}}, "H2PRO-FOOTREST": {"60-90天": {"2026-01": 382, "2026-02": 5189}, "90-120天": {"2026-02": 6850}}, "H2PRO-USED": {"60-90天": {"2026-02": 132}}, "OTHERS": {"120-180天": {"2026-01": 63, "2026-02": 1701}, "180-360天": {"2026-01": 1685, "2026-02": 44978}, "60-90天": {"2026-02": 273}, ">360天": {"2026-02": 711}}, "Q2": {"60-90天": {"2026-01": 1769, "2026-02": 24597}, "90-120天": {"2026-02": 33970}}, "X2": {"180-360天": {"2026-01": 581, "2026-02": 11536}}, "X2-USED": {"120-180天": {"2026-01": 44, "2026-02": 1188}}}, "美东新泽西2仓": {"DESK": {"120-180天": {"2026-01": 3.38, "2026-02": 91.26}}, "H1CLS-USED": {"120-180天": {"2026-01": 0.36, "2026-02": 9.72}, "180-360天": {"2026-01": 4.05, "2026-02": 109.35}}, "H1PRO": {">360天": {"2026-01": 0.84, "2026-02": 22.68}}, "H1PRO-USED": {"120-180天": {"2026-01": 5.48, "2026-02": 107.23}, "180-360天": {"2026-01": 23.35, "2026-02": 703.41}, "60-90天": {"2026-01": 1.01, "2026-02": 15.9}, "90-120天": {"2026-01": 0.31, "2026-02": 14.78}}, "H2PRO": {"120-180天": {"2026-01": 0.29, "2026-02": 7.83}}, "H2PRO-FOOTREST": {"60-90天": {"2026-01": 0.23, "2026-02": 1.77}}, "H2PRO-USED": {"60-90天": {"2026-01": 0.22, "2026-02": 5.06}, "90-120天": {"2026-02": 1.08}}, "KID": {"180-360天": {"2026-01": 0.29, "2026-02": 7.83}}, "KID-USED": {"180-360天": {"2026-01": 0.88, "2026-02": 23.76}}, "OTHERS": {"120-180天": {"2026-01": 1.72, "2026-02": 73.01}, "180-360天": {"2026-01": 1.13, "2026-02": 32.66}, "60-90天": {"2026-01": 1.47, "2026-02": 45.71}, "90-120天": {"2026-01": 1.7, "2026-02": 39.68}, ">360天": {"2026-01": 0.04, "2026-02": 22.33}}, "OTHERS-USED": {"180-360天": {"2026-01": 0.02, "2026-02": 0.54}}, "Q1-USED": {"120-180天": {"2026-01": 0.18, "2026-02": 4.14}, "180-360天": {"2026-01": 0.55, "2026-02": 15.93}}, "Q2": {"60-90天": {"2026-01": 12.35, "2026-02": 295.33}, "90-120天": {"2026-02": 33.46}}, "Q2-USED": {"120-180天": {"2026-02": 6.79}, "60-90天": {"2026-01": 0.69, "2026-02": 14.81}, "90-120天": {"2026-01": 0.67, "2026-02": 16.81}}, "X1-USED": {"120-180天": {"2026-01": 4.52, "2026-02": 85.99}, "180-360天": {"2026-01": 13.85, "2026-02": 428.08}, "60-90天": {"2026-01": 0.49, "2026-02": 10.78}, "90-120天": {"2026-02": 3}}, "X2": {"60-90天": {"2026-01": 5.16, "2026-02": 83.72}, "90-120天": {"2026-02": 13.69}}, "X2-USED": {"60-90天": {"2026-02": 7.2}}}, "美西洛杉矶5仓": {"H2PRO": {"60-90天": {"2026-02": 1001.85}}, "H2PRO-FOOTREST": {"60-90天": {"2026-02": 79.68}}, "KID": {">360天": {"2026-01": 0.47, "2026-02": 12.69}}, "OTHERS": {"120-180天": {"2026-01": 3.42, "2026-02": 81.19}, "180-360天": {"2026-01": 0.02, "2026-02": 15.47}, "60-90天": {"2026-02": 8.19}, ">360天": {"2026-01": 8.95, "2026-02": 233}}, "Q2": {"60-90天": {"2026-01": 3.68, "2026-02": 192.25}, "90-120天": {"2026-02": 29.44}}, "X2": {"120-180天": {"2026-02": 9.57}, "60-90天": {"2026-02": 221.34}, "90-120天": {"2026-01": 2.07, "2026-02": 38.79}}}, "英国莱斯特1仓": {}, "德国法兰克福2仓": {"H1CLS": {"180-360天": {"2026-01": 0.42, "2026-02": 11.34}}, "H1PRO": {"120-180天": {"2026-01": 0.3, "2026-02": 7.5}, "180-360天": {"2026-01": 1.69, "2026-02": 45.63}}, "H1PRO-USED": {"120-180天": {"2026-01": 2.07, "2026-02": 47.82}, "180-360天": {"2026-02": 26.55}, "60-90天": {"2026-02": 12.76}, "90-120天": {"2026-01": 0.59, "2026-02": 7.67}}, "H2PRO": {"60-90天": {"2026-02": 3.42}}, "H2PRO-USED": {"120-180天": {"2026-01": 1.03, "2026-02": 37.39}, "180-360天": {"2026-02": 6.3}, "90-120天": {"2026-01": 1.09, "2026-02": 15.99}}, "KID-USED": {"60-90天": {"2026-01": 0.11, "2026-02": 0.11}, "90-120天": {"2026-02": 4.42}}, "OTHERS": {"120-180天": {"2026-01": 2.72, "2026-02": 76.66}, "180-360天": {"2026-01": 5.52, "2026-02": 140.9}, "60-90天": {"2026-01": 1.33, "2026-02": 19.05}, "90-120天": {"2026-01": 0.74, "2026-02": 33.49}, ">360天": {"2026-01": 4.59, "2026-02": 125.08}}, "Q1": {"60-90天": {"2026-01": 2.65, "2026-02": 39.75}, "90-120天": {"2026-02": 47.76}}, "Q2": {"60-90天": {"2026-02": 40.5}}, "Q2-USED": {"120-180天": {"2026-02": 0.64}, "60-90天": {"2026-01": 0.11, "2026-02": 5.69}, "90-120天": {"2026-01": 0.16, "2026-02": 4.49}}, "X1": {">360天": {"2026-01": 2.32, "2026-02": 62.64}}, "X1-USED": {"120-180天": {"2026-01": 0.68, "2026-02": 18.36}}, "X2-USED": {"120-180天": {"2026-01": 0.67, "2026-02": 28.1}, "60-90天": {"2026-01": 0.66, "2026-02": 14.23}, "90-120天": {"2026-01": 0.69, "2026-02": 17.78}}}};
-
-// All unique SKUs
-const ALL_SKU = [...new Set(ALL_WH.flatMap(w=>Object.keys(RAW[w]||{})))].filter(s=>s&&s!='nan').sort();
-const SKU_PALETTE = ['#378add','#1d9e75','#7f77dd','#d4537e','#ef9f27','#e24b4a','#5dcaa5','#ba7517','#0f6e56','#534ab7','#993c1d','#3b6d11','#854f0b','#993556','#185fa5','#888780','#444441','#d85a30'];
-const SKU_C = {};
-ALL_SKU.forEach((s,i)=>SKU_C[s]=SKU_PALETTE[i%SKU_PALETTE.length]);
-
-let selCountry = 'ALL';
-let selWH = 'ALL';
-let selMonth = new Set(ALL_MONTHS);
-let selAging = new Set(AGING_KEYS);
-let selSKU = new Set(ALL_SKU);
-let curView = 'sku';
-let charts = {};
-
+const AGING_KEYS=['0-30天','30-60天','60-90天','90-120天','120-180天','180-360天','>360天'];
+const AGING_C={'0-30天':'#888780','30-60天':'#1d9e75','60-90天':'#7f77dd','90-120天':'#d4537e','120-180天':'#378add','180-360天':'#ef9f27','>360天':'#e24b4a'};
+const WH_META={'日本大阪1仓':{platform:'菜鸟',country:'日本',cur:'JPY',color:'#378add'},'英国莱斯特1仓':{platform:'菜鸟',country:'英国',cur:'GBP',color:'#7f77dd'},'美东新泽西2仓':{platform:'菜鸟',country:'美国',cur:'USD',color:'#1d9e75'},'美西洛杉矶5仓':{platform:'菜鸟',country:'美国',cur:'USD',color:'#5dcaa5'},'德国法兰克福2仓':{platform:'菜鸟',country:'德国',cur:'EUR',color:'#ba7517'},'乐仓美国仓':{platform:'乐仓',country:'美国',cur:'USD',color:'#ef9f27'},'乐仓德国仓':{platform:'乐仓',country:'德国',cur:'EUR',color:'#d4537e'},'乐仓英国仓':{platform:'乐仓',country:'英国',cur:'GBP',color:'#e24b4a'}};
+const ALL_WH=Object.keys(WH_META);
+const CC={'日本':'chip-jp','英国':'chip-uk','美国':'chip-us','德国':'chip-de'};
+const RAW={"日本大阪1仓": {"H1PRO": {"180-360天": {"2026-02": 4019}}, "H2PRO": {"180-360天": {"2026-02": 44210}, "60-90天": {"2026-02": 17475}, "90-120天": {"2026-02": 17420}}, "H2PRO-FOOTREST": {"60-90天": {"2026-02": 5571}, "90-120天": {"2026-02": 6850}}, "H2PRO-USED": {"60-90天": {"2026-02": 132}}, "OTHERS": {"120-180天": {"2026-02": 1764}, "180-360天": {"2026-02": 46663}, "60-90天": {"2026-02": 273}, ">360天": {"2026-02": 711}}, "Q2": {"60-90天": {"2026-02": 26366}, "90-120天": {"2026-02": 33970}}, "X2": {"180-360天": {"2026-02": 12117}}, "X2-USED": {"120-180天": {"2026-02": 1232}}}, "美东新泽西2仓": {"DESK": {"120-180天": {"2026-02": 94.64}}, "H1CLS-USED": {"120-180天": {"2026-02": 10.08}, "180-360天": {"2026-02": 113.4}}, "H1PRO": {">360天": {"2026-02": 23.52}}, "H1PRO-USED": {"120-180天": {"2026-02": 112.71}, "180-360天": {"2026-02": 726.76}, "60-90天": {"2026-02": 16.91}, "90-120天": {"2026-02": 15.09}}, "H2PRO": {"120-180天": {"2026-02": 8.12}}, "H2PRO-FOOTREST": {"60-90天": {"2026-02": 2.0}}, "H2PRO-USED": {"60-90天": {"2026-02": 5.28}, "90-120天": {"2026-02": 1.08}}, "KID": {"180-360天": {"2026-02": 8.12}}, "KID-USED": {"180-360天": {"2026-02": 24.64}}, "OTHERS": {"120-180天": {"2026-02": 74.73}, "180-360天": {"2026-02": 33.79}, "60-90天": {"2026-02": 47.18}, "90-120天": {"2026-02": 41.38}, ">360天": {"2026-02": 22.37}}, "OTHERS-USED": {"180-360天": {"2026-02": 0.56}}, "Q1-USED": {"120-180天": {"2026-02": 4.32}, "180-360天": {"2026-02": 16.48}}, "Q2": {"60-90天": {"2026-02": 307.68}, "90-120天": {"2026-02": 33.46}}, "Q2-USED": {"120-180天": {"2026-02": 6.79}, "60-90天": {"2026-02": 15.5}, "90-120天": {"2026-02": 17.48}}, "X1-USED": {"120-180天": {"2026-02": 90.51}, "180-360天": {"2026-02": 441.93}, "60-90天": {"2026-02": 11.27}, "90-120天": {"2026-02": 3.0}}, "X2": {"60-90天": {"2026-02": 88.88}, "90-120天": {"2026-02": 13.69}}, "X2-USED": {"60-90天": {"2026-02": 7.2}}}, "美西洛杉矶5仓": {"H2PRO": {"60-90天": {"2026-02": 1001.85}}, "H2PRO-FOOTREST": {"60-90天": {"2026-02": 79.68}}, "KID": {">360天": {"2026-02": 13.16}}, "OTHERS": {"120-180天": {"2026-02": 84.61}, "180-360天": {"2026-02": 15.49}, "60-90天": {"2026-02": 8.19}, ">360天": {"2026-02": 241.95}}, "Q2": {"60-90天": {"2026-02": 195.93}, "90-120天": {"2026-02": 29.44}}, "X2": {"120-180天": {"2026-02": 9.57}, "60-90天": {"2026-02": 221.34}, "90-120天": {"2026-02": 40.86}}}, "英国莱斯特1仓": {}, "德国法兰克福2仓": {"H1CLS": {"180-360天": {"2026-02": 11.76}}, "H1PRO": {"120-180天": {"2026-02": 7.8}, "180-360天": {"2026-02": 47.32}}, "H1PRO-USED": {"120-180天": {"2026-02": 49.89}, "180-360天": {"2026-02": 26.55}, "60-90天": {"2026-02": 12.76}, "90-120天": {"2026-02": 8.26}}, "H2PRO": {"60-90天": {"2026-02": 3.42}}, "H2PRO-USED": {"120-180天": {"2026-02": 38.42}, "180-360天": {"2026-02": 6.3}, "90-120天": {"2026-02": 17.08}}, "KID-USED": {"60-90天": {"2026-02": 0.22}, "90-120天": {"2026-02": 4.42}}, "OTHERS": {"120-180天": {"2026-02": 79.38}, "180-360天": {"2026-02": 146.42}, "60-90天": {"2026-02": 20.38}, "90-120天": {"2026-02": 34.23}, ">360天": {"2026-02": 129.67}}, "Q1": {"60-90天": {"2026-02": 42.4}, "90-120天": {"2026-02": 47.76}}, "Q2": {"60-90天": {"2026-02": 40.5}}, "Q2-USED": {"120-180天": {"2026-02": 0.64}, "60-90天": {"2026-02": 5.8}, "90-120天": {"2026-02": 4.65}}, "X1": {">360天": {"2026-02": 64.96}}, "X1-USED": {"120-180天": {"2026-02": 19.04}}, "X2-USED": {"120-180天": {"2026-02": 28.77}, "60-90天": {"2026-02": 14.89}, "90-120天": {"2026-02": 18.47}}}, "乐仓美国仓": {"H1PRO": {"120-180天": {"2026-02": 6.04}}, "OTHERS": {"180-360天": {"2026-02": 36.24}, ">360天": {"2026-02": 50.6}}}, "乐仓德国仓": {"H1PRO": {"120-180天": {"2026-02": 5.72}, "30-60天": {"2026-02": 1.36}, "60-90天": {"2026-02": 5.91}}, "OTHERS": {"180-360天": {"2026-02": 73.93}, ">360天": {"2026-02": 19.16}}, "X1": {"120-180天": {"2026-02": 3.88}, "90-120天": {"2026-02": 1.02}}}, "乐仓英国仓": {"H1PRO": {"120-180天": {"2026-02": 4.9}, "90-120天": {"2026-02": 2.3}}, "H2PRO": {"60-90天": {"2026-02": 56.67}, "90-120天": {"2026-02": 5.07}}, "H2PRO-FOOTREST": {"60-90天": {"2026-02": 28.08}, "90-120天": {"2026-02": 1.76}}, "OTHERS": {"120-180天": {"2026-02": 36.66}, "180-360天": {"2026-02": 77.81}, "60-90天": {"2026-02": 0.25}}, "Q2": {"60-90天": {"2026-02": 231.53}, "90-120天": {"2026-02": 37.64}}, "X1": {"120-180天": {"2026-02": 3.46}, "90-120天": {"2026-02": 3.35}}}};
+const ALL_SKU=[...new Set(ALL_WH.flatMap(w=>Object.keys(RAW[w]||{})))].filter(s=>s&&s!='nan').sort();
+const SKU_PAL=['#378add','#1d9e75','#7f77dd','#d4537e','#ef9f27','#e24b4a','#5dcaa5','#ba7517','#0f6e56','#534ab7','#993c1d','#3b6d11','#854f0b','#993556','#185fa5','#888780','#444441','#d85a30','#63380d'];
+const SKU_C={};ALL_SKU.forEach((s,i)=>SKU_C[s]=SKU_PAL[i%SKU_PAL.length]);
+let selPlatform='ALL',selCountry='ALL',selWH='ALL';
+let selMonth=new Set(['2026-02']);
+let selAging=new Set(AGING_KEYS);
+let selSKU=new Set(ALL_SKU);
+let curView='sku',charts={};
 function buildSkuSlicer(){
-  const el = document.getElementById('s-sku');
-  el.innerHTML = ALL_SKU.map(s=>`<span class="pill sel" data-v="${s}" style="border-color:${SKU_C[s]}55;background:${SKU_C[s]}12;color:${SKU_C[s]}">${s}</span>`).join('');
-  el.addEventListener('click', e=>{
-    const p=e.target.closest('[data-v]'); if(!p) return;
-    const v=p.dataset.v;
-    if(selSKU.has(v)){
-      if(selSKU.size<=1) return;
-      selSKU.delete(v); p.classList.remove('sel'); p.style.background=''; p.style.color='#555'; p.style.borderColor='';
-    } else {
-      selSKU.add(v); p.classList.add('sel');
-      p.style.background=SKU_C[v]+'12'; p.style.color=SKU_C[v]; p.style.borderColor=SKU_C[v]+'55';
-    }
+  const el=document.getElementById('s-sku');
+  el.innerHTML=ALL_SKU.map(s=>`<span class="pill sel" data-v="${s}" style="border-color:${SKU_C[s]}55;background:${SKU_C[s]}12;color:${SKU_C[s]}">${s}</span>`).join('');
+  el.addEventListener('click',e=>{
+    const p=e.target.closest('[data-v]');if(!p)return;const v=p.dataset.v;
+    if(selSKU.has(v)){if(selSKU.size<=1)return;selSKU.delete(v);p.classList.remove('sel');p.style.background='';p.style.color='#555';p.style.borderColor='';}
+    else{selSKU.add(v);p.classList.add('sel');p.style.background=SKU_C[v]+'12';p.style.color=SKU_C[v];p.style.borderColor=SKU_C[v]+'55';}
     refresh();
   });
 }
-
-function getV(wh,sku,aging,mon){ return RAW[wh]?.[sku]?.[aging]?.[mon]||0; }
-
-function getSum(wh,sku,agings,months){
-  let t=0;
-  (agings||[...selAging]).forEach(a=>(months||[...selMonth]).forEach(m=>{t+=getV(wh,sku,a,m);}));
-  return t;
-}
-
-function activeWH(){
-  return ALL_WH.filter(w=>{
-    if(selWH!=='ALL' && w!==selWH) return false;
-    if(selCountry!=='ALL' && WH_META[w].country!==selCountry) return false;
-    return true;
-  });
-}
-
-function activeSKU(){
-  const ws=activeWH();
-  return [...selSKU].filter(s=>ws.some(w=>getSum(w,s)>0));
-}
-
-function fmt(n){ const v=Math.round(+n||0); return v===0?'—':v.toLocaleString(); }
-function fmtD(n){ const v=+(+n||0).toFixed(1); return v===0?'':v.toLocaleString(); }
-
+function getV(w,s,a,m){return RAW[w]?.[s]?.[a]?.[m]||0;}
+function getSum(w,s,ag,mo){let t=0;(ag||[...selAging]).forEach(a=>(mo||[...selMonth]).forEach(m=>{t+=getV(w,s,a,m);}));return t;}
+function activeWH(){return ALL_WH.filter(w=>{const m=WH_META[w];if(selWH!=='ALL'&&w!==selWH)return false;if(selPlatform!=='ALL'&&m.platform!==selPlatform)return false;if(selCountry!=='ALL'&&m.country!==selCountry)return false;return true;});}
+function activeSKU(){const ws=activeWH();return[...selSKU].filter(s=>ws.some(w=>getSum(w,s)>0));}
+function fmt(n){const v=Math.round(+n||0);return v===0?'—':v.toLocaleString();}
+function fmtD(n){const v=+(+n||0).toFixed(1);return v===0?'':v.toLocaleString();}
 function refresh(){
-  const ws=activeWH(), skus=activeSKU();
-  const byCur={}, riskByCur={};
-  const skuTot={}, whTot={};
-
-  ws.forEach(w=>{
-    const cur=WH_META[w].cur;
-    skus.forEach(s=>{
-      const v=getSum(w,s); if(v<=0) return;
-      byCur[cur]=(byCur[cur]||0)+v;
-      const r=getSum(w,s,['180-360天','>360天']);
-      riskByCur[cur]=(riskByCur[cur]||0)+r;
-      skuTot[s]=(skuTot[s]||0)+v;
-      whTot[w]=(whTot[w]||0)+v;
-    });
-  });
-
+  const ws=activeWH(),skus=activeSKU();
+  const byCur={},riskByCur={},skuTot={},whTot={};
+  ws.forEach(w=>{const cur=WH_META[w].cur;skus.forEach(s=>{const v=getSum(w,s);if(v<=0)return;byCur[cur]=(byCur[cur]||0)+v;const r=getSum(w,s,['180-360天','>360天']);riskByCur[cur]=(riskByCur[cur]||0)+r;skuTot[s]=(skuTot[s]||0)+v;whTot[w]=(whTot[w]||0)+v;});});
   document.getElementById('m-sku').textContent=skus.length;
   document.getElementById('m-total').innerHTML=Object.entries(byCur).filter(([,v])=>v>0).map(([c,v])=>`${fmt(v)} ${c}`).join('<br>')||'0';
   document.getElementById('m-risk').innerHTML=Object.entries(riskByCur).filter(([,v])=>v>0).map(([c,v])=>`${fmt(v)} ${c}`).join('<br>')||'—';
-  const totalAll=Object.values(byCur).reduce((a,b)=>a+b,0);
-  const riskAll=Object.values(riskByCur).reduce((a,b)=>a+b,0);
-  document.getElementById('m-risk-sub').textContent=totalAll>0?`占比 ${(riskAll/totalAll*100).toFixed(0)}%`:'';
-  const topSku=Object.entries(skuTot).sort((a,b)=>b[1]-a[1])[0];
-  const topWh=Object.entries(whTot).sort((a,b)=>b[1]-a[1])[0];
-  document.getElementById('m-topsku').textContent=topSku?topSku[0]:'—';
-  document.getElementById('m-topsku-v').textContent=topSku?fmt(topSku[1])+' '+WH_META[ws[0]||'日本大阪1仓'].cur:'—';
-  document.getElementById('m-topwh').textContent=topWh?topWh[0]:'—';
-  document.getElementById('m-topwh-v').textContent=topWh?fmt(topWh[1])+' '+WH_META[topWh[0]].cur:'—';
-
-  updateMain(ws,skus); updateDonut(ws,skus); updateTable(ws,skus);
+  const tA=Object.values(byCur).reduce((a,b)=>a+b,0),rA=Object.values(riskByCur).reduce((a,b)=>a+b,0);
+  document.getElementById('m-risk-sub').textContent=tA>0?`占比 ${(rA/tA*100).toFixed(0)}%`:'';
+  const topS=Object.entries(skuTot).sort((a,b)=>b[1]-a[1])[0];
+  const topW=Object.entries(whTot).sort((a,b)=>b[1]-a[1])[0];
+  document.getElementById('m-topsku').textContent=topS?topS[0]:'—';
+  document.getElementById('m-topsku-v').textContent=topS&&ws[0]?fmt(topS[1])+' '+WH_META[ws[0]].cur:'—';
+  document.getElementById('m-topwh').textContent=topW?topW[0]:'—';
+  document.getElementById('m-topwh-v').textContent=topW?fmt(topW[1])+' '+WH_META[topW[0]].cur:'—';
+  updateMain(ws,skus);updateDonut(ws,skus);updateTable(ws,skus);
 }
-
 function updateMain(ws,skus){
   document.getElementById('main-title').textContent=curView==='sku'?'SKU 型号 × 仓库（仓储费）':'仓库 × SKU 型号（仓储费）';
   let labels,datasets,legItems;
-  if(curView==='sku'){
-    labels=skus;
-    datasets=ws.map(w=>({label:w,data:skus.map(s=>+getSum(w,s).toFixed(1)),backgroundColor:WH_META[w].color,borderRadius:2}));
-    legItems=ws.map(w=>({label:w,color:WH_META[w].color}));
-  } else {
-    labels=ws;
-    datasets=skus.map(s=>({label:s,data:ws.map(w=>+getSum(w,s).toFixed(1)),backgroundColor:SKU_C[s]||'#888',borderRadius:2}));
-    legItems=skus.map(s=>({label:s,color:SKU_C[s]||'#888'}));
-  }
+  if(curView==='sku'){labels=skus;datasets=ws.map(w=>({label:w,data:skus.map(s=>+getSum(w,s).toFixed(1)),backgroundColor:WH_META[w].color,borderRadius:2}));legItems=ws.map(w=>({label:w,color:WH_META[w].color}));}
+  else{labels=ws;datasets=skus.map(s=>({label:s,data:ws.map(w=>+getSum(w,s).toFixed(1)),backgroundColor:SKU_C[s]||'#888',borderRadius:2}));legItems=skus.map(s=>({label:s,color:SKU_C[s]||'#888'}));}
   document.getElementById('leg-main').innerHTML=legItems.map(l=>`<span><span class="dot" style="background:${l.color}"></span>${l.label}</span>`).join('');
   const id='c-main';
-  const opts={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-    scales:{x:{stacked:true,ticks:{font:{size:10},color:'#888',maxRotation:35,autoSkip:false}},y:{stacked:true,ticks:{color:'#888',callback:v=>v.toLocaleString()}}}};
+  const opts={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{stacked:true,ticks:{font:{size:10},color:'#888',maxRotation:35,autoSkip:false}},y:{stacked:true,ticks:{color:'#888',callback:v=>v.toLocaleString()}}}};
   if(charts[id]){charts[id].data={labels,datasets};charts[id].update();}
   else charts[id]=new Chart(document.getElementById(id),{type:'bar',data:{labels,datasets},options:opts});
 }
-
 function updateDonut(ws,skus){
-  const totals={};
-  AGING_KEYS.forEach(a=>totals[a]=0);
+  const totals={};AGING_KEYS.forEach(a=>totals[a]=0);
   ws.forEach(w=>skus.forEach(s=>[...selAging].forEach(a=>[...selMonth].forEach(m=>{totals[a]+=getV(w,s,a,m);}))));
   const ak=AGING_KEYS.filter(a=>selAging.has(a)&&totals[a]>0.01);
   const total=ak.reduce((s,a)=>s+totals[a],0);
@@ -300,111 +236,29 @@ function updateDonut(ws,skus){
   const d={labels:ak,datasets:[{data:ak.map(a=>+totals[a].toFixed(1)),backgroundColor:ak.map(a=>AGING_C[a]),borderWidth:2,borderColor:'#fff'}]};
   if(charts[id]){charts[id].data=d;charts[id].update();}
   else charts[id]=new Chart(document.getElementById(id),{type:'doughnut',data:d,options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{display:false}}}});
-  document.getElementById('donut-leg').innerHTML=ak.map(a=>{
-    const pct=total>0?((totals[a]/total)*100).toFixed(1):0;
-    const r=a==='180-360天'||a==='>360天';
-    return `<div style="display:flex;align-items:center;gap:5px;margin-bottom:4px">
-      <span style="width:8px;height:8px;border-radius:2px;background:${AGING_C[a]};flex-shrink:0"></span>
-      <span style="flex:1;color:#555;font-size:11px">${a}</span>
-      <span style="font-size:11px;font-weight:600;color:${r?'#a32d2d':'#1a1a1a'}">${pct}%</span>
-    </div>`;
-  }).join('');
+  document.getElementById('donut-leg').innerHTML=ak.map(a=>{const pct=total>0?((totals[a]/total)*100).toFixed(1):0;const r=a==='180-360天'||a==='>360天';return `<div style="display:flex;align-items:center;gap:5px;margin-bottom:4px"><span style="width:8px;height:8px;border-radius:2px;background:${AGING_C[a]};flex-shrink:0"></span><span style="flex:1;color:#555;font-size:11px">${a}</span><span style="font-size:11px;font-weight:600;color:${r?'#a32d2d':'#1a1a1a'}">${pct}%</span></div>`;}).join('');
 }
-
 function updateTable(ws,skus){
-  const activeAging=AGING_KEYS.filter(a=>selAging.has(a));
-  document.getElementById('tbl-head').innerHTML=`<tr>
-    <th>SKU 型号</th><th>仓库</th><th>月份</th><th>货币</th>
-    ${activeAging.map(a=>`<th class="num" style="color:${(a==='180-360天'||a==='>360天')?'#854f0b':'#666'}">${a}</th>`).join('')}
-    <th class="num">合计</th><th>风险占比</th>
-  </tr>`;
-
-  const sortedSkus=[...skus].sort((a,b)=>{
-    const ta=ws.reduce((s,w)=>s+getSum(w,a),0);
-    const tb=ws.reduce((s,w)=>s+getSum(w,b),0);
-    return tb-ta;
-  });
-
+  const aa=AGING_KEYS.filter(a=>selAging.has(a));
+  document.getElementById('tbl-head').innerHTML=`<tr><th>SKU 型号</th><th>平台</th><th>仓库</th><th>月份</th><th>货币</th>${aa.map(a=>`<th class="num" style="color:${(a==='180-360天'||a==='>360天')?'#854f0b':'#666'}">${a}</th>`).join('')}<th class="num">合计</th><th>风险</th></tr>`;
+  const sortedSkus=[...skus].sort((a,b)=>ws.reduce((s,w)=>s+getSum(w,b),0)-ws.reduce((s,w)=>s+getSum(w,a),0));
   const rows=[];
-  sortedSkus.forEach(sku=>{
-    ws.forEach(wh=>{
-      [...selMonth].sort().forEach(mon=>{
-        const agingVals={};
-        let rowTotal=0, rowRisk=0;
-        activeAging.forEach(a=>{ const v=getV(wh,sku,a,mon); agingVals[a]=v; rowTotal+=v; if(a==='180-360天'||a==='>360天') rowRisk+=v; });
-        if(rowTotal<0.01) return;
-        rows.push({wh,sku,mon,agingVals,rowTotal,rowRisk,cur:WH_META[wh].cur,chip:WH_META[wh].chip});
-      });
-    });
-  });
-
-  const maxRisk=Math.max(...rows.map(r=>r.rowRisk),1);
+  sortedSkus.forEach(sku=>{ws.forEach(wh=>{[...selMonth].sort().forEach(mon=>{const av={};let rT=0,rR=0;aa.forEach(a=>{const v=getV(wh,sku,a,mon);av[a]=v;rT+=v;if(a==='180-360天'||a==='>360天')rR+=v;});if(rT<0.01)return;rows.push({wh,sku,mon,av,rT,rR,meta:WH_META[wh]});});});});
+  const maxR=Math.max(...rows.map(r=>r.rR),1);
   document.getElementById('tbl-body').innerHTML=rows.map(r=>{
-    const rPct=r.rowTotal>0?(r.rowRisk/r.rowTotal*100).toFixed(0):0;
-    return `<tr>
-      <td><span style="display:inline-block;width:7px;height:7px;border-radius:2px;background:${SKU_C[r.sku]||'#888'};margin-right:5px;vertical-align:middle"></span><strong>${r.sku}</strong></td>
-      <td><span class="chip ${r.chip}">${WH_META[r.wh].country}</span> ${r.wh}</td>
-      <td>${r.mon}</td>
-      <td style="color:#aaa;font-size:10px">${r.cur}</td>
-      ${activeAging.map(a=>{
-        const v=r.agingVals[a];
-        const isRisk=(a==='180-360天'||a==='>360天')&&v>0;
-        return `<td class="num${isRisk?' red':''}">${fmtD(v)}</td>`;
-      }).join('')}
-      <td class="num" style="font-weight:600">${fmt(r.rowTotal)}</td>
-      <td style="white-space:nowrap">
-        ${r.rowRisk>0
-          ?`<span style="display:inline-block;height:6px;width:${Math.round(r.rowRisk/maxRisk*48)}px;background:#ef9f27;border-radius:3px;vertical-align:middle;margin-right:4px"></span><span style="font-size:10px;color:#854f0b">${rPct}%</span>`
-          :'<span style="color:#ccc;font-size:10px">—</span>'}
-      </td>
-    </tr>`;
+    const rPct=r.rT>0?(r.rR/r.rT*100).toFixed(0):0;
+    const pc=r.meta.platform==='菜鸟'?'chip-cn':'chip-lc';
+    return `<tr><td><span style="display:inline-block;width:7px;height:7px;border-radius:2px;background:${SKU_C[r.sku]||'#888'};margin-right:5px;vertical-align:middle"></span><strong>${r.sku}</strong></td><td><span class="chip ${pc}">${r.meta.platform}</span></td><td><span class="chip ${CC[r.meta.country]}">${r.meta.country}</span> ${r.wh}</td><td>${r.mon}</td><td style="color:#aaa;font-size:10px">${r.meta.cur}</td>${aa.map(a=>{const v=r.av[a];const isR=(a==='180-360天'||a==='>360天')&&v>0;return `<td class="num${isR?' red':''}">${fmtD(v)}</td>`;}).join('')}<td class="num" style="font-weight:600">${fmt(r.rT)}</td><td style="white-space:nowrap">${r.rR>0?`<span style="display:inline-block;height:6px;width:${Math.round(r.rR/maxR*48)}px;background:#ef9f27;border-radius:3px;vertical-align:middle;margin-right:4px"></span><span style="font-size:10px;color:#854f0b">${rPct}%</span>`:'<span style="color:#ccc;font-size:10px">—</span>'}</td></tr>`;
   }).join('');
 }
-
-function setView(v){
-  curView=v;
-  document.getElementById('vt-sku').classList.toggle('on',v==='sku');
-  document.getElementById('vt-wh').classList.toggle('on',v==='wh');
-  refresh();
-}
-
-// Single-select: 国家
-document.getElementById('s-country').addEventListener('click',e=>{
-  const p=e.target.closest('[data-v]'); if(!p) return;
-  document.querySelectorAll('#s-country .pill').forEach(x=>x.classList.remove('on'));
-  p.classList.add('on'); selCountry=p.dataset.v;
-  // Reset warehouse slicer if country changes
-  if(selCountry!=='ALL'){ selWH='ALL'; document.querySelectorAll('#s-wh .pill').forEach(x=>x.classList.remove('on')); document.querySelector('#s-wh [data-v="ALL"]').classList.add('on'); }
-  refresh();
-});
-
-// Single-select: 仓库
-document.getElementById('s-wh').addEventListener('click',e=>{
-  const p=e.target.closest('[data-v]'); if(!p) return;
-  document.querySelectorAll('#s-wh .pill').forEach(x=>x.classList.remove('on'));
-  p.classList.add('on'); selWH=p.dataset.v; refresh();
-});
-
-// Multi-select: 月份
-document.getElementById('s-month').addEventListener('click',e=>{
-  const p=e.target.closest('[data-v]'); if(!p) return;
-  const v=p.dataset.v;
-  if(selMonth.has(v)){ if(selMonth.size>1){selMonth.delete(v);p.classList.remove('sel');} }
-  else{ selMonth.add(v);p.classList.add('sel'); }
-  refresh();
-});
-
-// Multi-select: 库龄段
-document.getElementById('s-aging').addEventListener('click',e=>{
-  const p=e.target.closest('[data-v]'); if(!p) return;
-  const v=p.dataset.v;
-  if(selAging.has(v)){ if(selAging.size>1){selAging.delete(v);p.classList.remove('sel');} }
-  else{ selAging.add(v);p.classList.add('sel'); }
-  refresh();
-});
-
-buildSkuSlicer();
-refresh();
+function setView(v){curView=v;document.getElementById('vt-sku').classList.toggle('on',v==='sku');document.getElementById('vt-wh').classList.toggle('on',v==='wh');refresh();}
+function bindSingle(id,setter){document.getElementById(id).addEventListener('click',e=>{const p=e.target.closest('[data-v]');if(!p)return;document.querySelectorAll(`#${id} .pill`).forEach(x=>x.classList.remove('on'));p.classList.add('on');setter(p.dataset.v);refresh();});}
+bindSingle('s-platform',v=>{selPlatform=v;});
+bindSingle('s-country',v=>{selCountry=v;});
+bindSingle('s-wh',v=>{selWH=v;});
+document.getElementById('s-month').addEventListener('click',e=>{const p=e.target.closest('[data-v]');if(!p)return;const v=p.dataset.v;if(selMonth.has(v)){if(selMonth.size>1){selMonth.delete(v);p.classList.remove('sel');}}else{selMonth.add(v);p.classList.add('sel');}refresh();});
+document.getElementById('s-aging').addEventListener('click',e=>{const p=e.target.closest('[data-v]');if(!p)return;const v=p.dataset.v;if(selAging.has(v)){if(selAging.size>1){selAging.delete(v);p.classList.remove('sel');}}else{selAging.add(v);p.classList.add('sel');}refresh();});
+buildSkuSlicer();refresh();
 </script>
 </body>
 </html>
